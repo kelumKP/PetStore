@@ -7,8 +7,8 @@ using System.Threading.Tasks;
 
 namespace PetStore.ConsoleApp.APIClient
 {
-    public interface IPetStoreApiClient
+    public interface IPetStoreApiClient<T>
     {
-        Task<List<Pet>> FetchAvailablePetsAsync();
+        Task<List<T>> FetchDataAsync();
     }
 }

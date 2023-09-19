@@ -53,15 +53,15 @@ namespace PetStore.UnitTest
                     Content = new StringContent("Internal Server Error"),
                 });
 
-            var petStoreApiClient = new PetStoreApiClient(configuration.Object, httpClient);
+            var petStoreApiClient = new PetStoreApiClient<Pet>(configuration.Object, httpClient);
 
             try
             {
                 // Act
-                List<Pet> pets = await petStoreApiClient.FetchAvailablePetsAsync();
+                List<Pet> availablePets = await petStoreApiClient.FetchDataAsync();
 
                 // Assert
-                Assert.IsNull(pets); // Ensure that pets are null in case of failure
+                Assert.IsNull(availablePets); // Ensure that pets are null in case of failure
             }
             catch (HttpRequestException ex)
             {
@@ -96,15 +96,14 @@ namespace PetStore.UnitTest
             var handler = new Mock<HttpMessageHandler>(MockBehavior.Strict);
             var httpClient = new HttpClient(handler.Object);
 
-            var petStoreApiClient = new PetStoreApiClient(configuration.Object, httpClient);
+            var petStoreApiClient = new PetStoreApiClient<Pet>(configuration.Object, httpClient);
 
             try
             {
-                // Act
-                List<Pet> pets = await petStoreApiClient.FetchAvailablePetsAsync();
-             
+                List<Pet> availablePets = await petStoreApiClient.FetchDataAsync();
+
                 // Assert
-                Assert.IsNotNull(pets);
+                Assert.IsNotNull(availablePets);
                 
                 
             }

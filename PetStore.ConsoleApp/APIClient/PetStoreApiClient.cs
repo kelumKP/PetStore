@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace PetStore.ConsoleApp.APIClient
 {
-    public class PetStoreApiClient : IPetStoreApiClient
+    public class PetStoreApiClient<T> : IPetStoreApiClient<T>
     {
         private readonly IConfiguration _configuration;
         private readonly HttpClient _httpClient;
@@ -19,7 +19,7 @@ namespace PetStore.ConsoleApp.APIClient
             _httpClient = httpClient;
         }
 
-        public async Task<List<Pet>> FetchAvailablePetsAsync()
+        public async Task<List<T>> FetchDataAsync()
         {
             try
             {
@@ -34,7 +34,7 @@ namespace PetStore.ConsoleApp.APIClient
                     if (response.IsSuccessStatusCode)
                     {
                         string jsonResponse = await response.Content.ReadAsStringAsync();
-                        return JsonConvert.DeserializeObject<List<Pet>>(jsonResponse);
+                        return JsonConvert.DeserializeObject<List<T>>(jsonResponse);
                     }
                     else
                     {

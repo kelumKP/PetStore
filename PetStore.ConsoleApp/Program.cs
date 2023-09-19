@@ -26,9 +26,8 @@ class Program
             var httpClient = new HttpClient(); // Create an instance of HttpClient
 
             // Use dependency injection to resolve IPetStoreApiClient
-            IPetStoreApiClient petStoreApiClient = new PetStoreApiClient(configuration, httpClient);
-
-            List<Pet> availablePets = await petStoreApiClient.FetchAvailablePetsAsync();
+            IPetStoreApiClient<Pet> petStoreApiClient = new PetStoreApiClient<Pet>(configuration, httpClient);
+            List<Pet> availablePets = await petStoreApiClient.FetchDataAsync();
             OutputHandler.PrintPets(availablePets);
         }
         catch (Exception ex)
@@ -45,7 +44,7 @@ class Program
                 // Register the HttpClient as a singleton
                 services.AddSingleton<HttpClient>();
 
-                // Register IPetStoreApiClient and provide the HttpClient instance
-                services.AddTransient<IPetStoreApiClient, PetStoreApiClient>();
+                // Register IPetStoreApiClient<Pet> and provide the HttpClient instance
+                services.AddTransient<IPetStoreApiClient<Pet>, PetStoreApiClient<Pet>>();
             });
 }
