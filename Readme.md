@@ -7,6 +7,8 @@ docs has ReadMe.file src has following ConsoleApp folder and Models folder
 
 ConsoleApp include PetStore.ConsoleApp models to maintain, PetStore.Models C# Library project 
 
+API - https://petstore.swagger.io/
+
 ---
 
 ##### What are the efforts to taken to make it indepentant and loosely couple manner
