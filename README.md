@@ -24,8 +24,8 @@ API - https://petstore.swagger.io/
 ######  1. Implement a global error handling middleware that catches unhandled exceptions and logs them centrally.
 ######  2. Consider using a more robust logging framework like Serilog or NLog.
 ######  3. Implement proper authentication and authorization mechanisms if required.
-######  4. Implement rate limiting to protect your application and the external API from abuse.
-######  5. Consider containerizing your application using Docker.
+######  4. Implement rate limiting to protect this application and the external API from abuse.
+######  5. in future Consider containerizing this application using Docker.
 ######  6. Set up a CI/CD pipeline to automate the build, testing, and deployment processes. Tools like Jenkins, Azure DevOps, or GitHub Actions can be used for this purpose.
 
 ---
