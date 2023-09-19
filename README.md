@@ -37,3 +37,4 @@ API - https://petstore.swagger.io/
 ###### 4. How to enahnce enterprice level application 
 ###### 5. How to get values from from appsettings.json
 ###### 6. how to access an API from console app 
+###### 7. show colored fonts in console app 

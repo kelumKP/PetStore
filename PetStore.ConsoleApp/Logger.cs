@@ -1,19 +1,21 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace PetStore.ConsoleApp
+﻿namespace PetStore.ConsoleApp
 {
     public class Logger
     {
+        // Region: Public Methods
+
+        /// <summary>
+        /// Logs an error message to the console.
+        /// </summary>
+        /// <param name="ex">The exception to log.</param>
         public static void LogError(Exception ex)
         {
-            // Log the error to the console and optionally to a log file
+            // Log the error to the console
             Console.WriteLine($"Error: {ex.Message}");
+
             // You can add code here to log to a file, database, or any other desired destination.
         }
+
+        // End of Region: Public Methods
     }
 }
