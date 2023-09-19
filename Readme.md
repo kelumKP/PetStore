@@ -33,6 +33,7 @@ API - https://petstore.swagger.io/
 
 ###### 1. Injecting the class file  
 ###### 2. How to Write Unit Test for the API 
-###### 3. How to Write Unit Test for the API 
+###### 3. How to access API from Nunit
 ###### 4. How to enahnce enterprice level application 
 ###### 5. How to get values from from appsettings.json
+###### 6. how to access an API from console app 
