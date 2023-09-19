@@ -23,11 +23,14 @@ class Program
             .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
             .Build();
 
+
             // Use dependency injection to resolve IPetStoreApiClient
             IPetStoreApiClient petStoreApiClient = new PetStoreApiClient(configuration);
 
             List<Pet> availablePets = await petStoreApiClient.FetchAvailablePetsAsync();
             OutputHandler.PrintPets(availablePets);
+        
+
         }
         catch (Exception ex)
         {
