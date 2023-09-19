@@ -19,18 +19,17 @@ class Program
         try
         {
             IConfiguration configuration = new ConfigurationBuilder()
-            .SetBasePath(Directory.GetCurrentDirectory())
-            .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
-            .Build();
+                .SetBasePath(Directory.GetCurrentDirectory())
+                .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
+                .Build();
 
+            var httpClient = new HttpClient(); // Create an instance of HttpClient
 
             // Use dependency injection to resolve IPetStoreApiClient
-            IPetStoreApiClient petStoreApiClient = new PetStoreApiClient(configuration);
+            IPetStoreApiClient petStoreApiClient = new PetStoreApiClient(configuration, httpClient);
 
             List<Pet> availablePets = await petStoreApiClient.FetchAvailablePetsAsync();
             OutputHandler.PrintPets(availablePets);
-        
-
         }
         catch (Exception ex)
         {
@@ -40,9 +39,13 @@ class Program
     }
 
     public static IHostBuilder CreateHostBuilder(string[] args) =>
-    Host.CreateDefaultBuilder(args)
-        .ConfigureServices((hostContext, services) =>
-        {
-            services.AddTransient<IPetStoreApiClient, PetStoreApiClient>();
-        });
+        Host.CreateDefaultBuilder(args)
+            .ConfigureServices((hostContext, services) =>
+            {
+                // Register the HttpClient as a singleton
+                services.AddSingleton<HttpClient>();
+
+                // Register IPetStoreApiClient and provide the HttpClient instance
+                services.AddTransient<IPetStoreApiClient, PetStoreApiClient>();
+            });
 }

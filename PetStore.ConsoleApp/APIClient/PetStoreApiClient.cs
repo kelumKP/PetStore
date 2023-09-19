@@ -3,9 +3,7 @@ using Newtonsoft.Json;
 using PetStore.Models;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Net.Http;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace PetStore.ConsoleApp.APIClient
@@ -13,12 +11,12 @@ namespace PetStore.ConsoleApp.APIClient
     public class PetStoreApiClient : IPetStoreApiClient
     {
         private readonly IConfiguration _configuration;
+        private readonly HttpClient _httpClient;
 
-
-        public PetStoreApiClient(IConfiguration configuration)
+        public PetStoreApiClient(IConfiguration configuration, HttpClient httpClient)
         {
             _configuration = configuration;
-
+            _httpClient = httpClient;
         }
 
         public async Task<List<Pet>> FetchAvailablePetsAsync()
@@ -40,17 +38,17 @@ namespace PetStore.ConsoleApp.APIClient
                     }
                     else
                     {
-                        // Log the error and throw a custom exception
+                        // Log the error
                         string errorMessage = $"Failed to retrieve data. Status code: {response.StatusCode}";
                         Logger.LogError(new Exception(errorMessage));
-                        throw new CustomApiException(errorMessage);
+                        return null; // Return a default value or handle the error case as needed
                     }
                 }
             }
             catch (Exception ex)
             {
                 Logger.LogError(ex);
-                throw;
+                throw; // This line can be safely removed
             }
         }
 
